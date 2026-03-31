@@ -1,0 +1,128 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+
+  <style>
+    body {
+      background: #111;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+      margin-top: 80px;
+none;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #00ffcc;
+      border: none;
+      border-radius: 8px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+    }
+
+    .card {
+      background: #1e1e1e;
+      padding: 30px;
+      margin: auto;
+      margin-top: 50px;
+      width: 90%;
+      max-width: 320px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,255,204,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+<div>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="card">
+  <h1>Hello 👋</h1>
+  <p id="text">Welcome to my website</p>
+
+  <button onclick="alert('Hello!')">Click Me</button>
+  <button onclick="changeText()">Change Text</button>
+  <button onclick="changeBg()">Change Background</button>
+
+  <input type="text" id="nameInput" placeholder="Enter your name">
+  <button onclick="showName()">Submit</button><button onclick="resetAll()">Reset</button>
+  <button onclick="toggleMode()">Dark / Light Mode</button>
+</div>
+
+<script>
+let isBlue = false;
+
+function changeText() {
+  document.getElementById("text").innerText = "You clicked the button!";
+}
+
+function changeBg() {
+  if (isBlue) {
+    document.body.style.background = "#111";
+  } else {
+    document.body.style.background = "blue";
+  }
+  isBlue = !isBlue;
+}
+
+function showName() {
+  let name = document.getElementById("nameInput").value;
+
+  localStorage.setItem("username", name);
+
+  document.getElementById("text").innerText = "Hello " + name;
+}
+
+// auto load saved name
+let savedName = localStorage.getItem("username");
+
+if (savedName) {
+  document.getElementById("text").innerText = "Hello " + savedName;
+}
+function resetAll() {
+  // clear saved name
+  localStorage.removeItem("username");
+
+  // reset text
+  document.getElementById("text").innerText = "Welcome to my website";
+
+  // reset input
+  document.getElementById("nameInput").value = "";
+
+  // reset background
+  document.body.style.background = "#111";
+  isBlue = false;
+}
+ function toggleMode() {
+  if (isDark) {
+    document.body.style.background = "white";
+    document.body.style.color = "black";
+    localStorage.setItem("theme", "light");
+  } else {
+    document.body.style.background = "#111";
+    document.body.style.color = "white";
+    localStorage.setItem("theme", "dark");
+  }
+
+  isDark = !isDark;
+}
+}
+</script>
+
+</body>
+</html>
